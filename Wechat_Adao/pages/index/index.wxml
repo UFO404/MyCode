@@ -1,0 +1,55 @@
+<import src="../../wxParse/wxParse.wxml" />
+
+<!--遮罩-->
+<view style="width:100%;height:100%;" class="box" hidden="{{!open}}" bindtap="tap_ch" catchtouchmove="f_touch">
+</view>
+<loading hidden="{{!isloading}}">
+  加载中...
+</loading>
+
+<!--page/one/index.wxml-->
+<view class="page-content {{open ? 'c-state2' : ''}}">
+  <scroll-view class="fliststl" scroll-y="true">
+    <view class="wc" wx:for="{{forumlist}}">
+      <view>{{item.name}}</view>
+      <view class="wc" wx:for="{{item.forums}}" data-fname="{{item.name}}" data-id="{{item.id}}" bindtap="bindViewTap">
+        <view>{{item.name}}</view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+<view bindtouchmove="tap_drag" bindtouchend="tap_end" bindtouchstart="tap_start" class="page-top">
+  <view  class="main_list" wx:for="{{sforum}}" bindtap="load_thread" data-id="{{item.id}}">
+    <view class="yuanjiao" hover-class="main_list_hover">
+      <view class="text_1">
+        <view class="{{item.admin == 1?'admin_id':''}}">{{item.userid}}</view>
+        <view>{{item.now}}</view>
+        <view class="sum_cunt">{{item.replyCount}}</view>
+      </view>
+      <view class="sage" hidden="{{item.sage==0?true:false}}">SAGE</view>
+      <view class="main_text">
+        <template is="wxParse" data="{{wxParseData:item.html.nodes}}" />
+      </view>
+      <view style="width:100%;" wx:if="{{item.img!=''}}">
+
+        <!--不加这一层可能导致点击图片周围空白区域无法触发tap-->
+        <image wx:if="{{!item.img_load_success}}" class="loading_gif" src="../../images/loading.gif"></image>
+        <image style="height:{{item.img_height}}px;width:{{item.img_width}}px;" id="{{index}}" class="img" src="{{item.thumburl}}{{item.img}}" mode="aspectFit" bindtap="bind_pic_tap" bindload="bind_pic_load">loading</image>
+      </view>
+    </view>
+    <view class="v_hr"></view>
+  </view>
+</view>
+
+<!--列表图表
+  <view class="icon_list {{open ? 'c-state1' : ''}}">
+    <image class="tap_cn" bindtap="tap_ch" src="../../images/btn.png"></image>
+  </view>-->
+
+<!--底部导航-->
+<view class="footer {{open ? 'c-state1' : ''}}">
+  <image bindtap="tap_ch" mode="aspectFit" class="icons" src="../../images/menu.png"></image>
+  <image bindtap="tap_sl" mode="aspectFit" class="icons" src="../../images/goto.png"></image>
+  <image bindtap="tap_nw" mode="aspectFit" class="icons" src="../../images/new.png"></image>
+  <image bindtap="tap_ma" mode="aspectFit" class="icons" src="../../images/manager.png"></image>
+</view>

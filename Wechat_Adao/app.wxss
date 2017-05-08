@@ -1,0 +1,47 @@
+/**app.wxss**/
+@import "wxParse/wxParse.wxss";
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+
+.sage{/*SAGE*/
+  color:#f00;
+  font-size: 12px;
+  margin-left: 5px;
+  margin-top: 2px;
+  text-align: left;
+}
+/*破主回复*/
+.po{ 
+  color: black;
+  font-weight: 800;
+}
+/*红名*/
+.admin_id{ 
+  color: red !important;
+}
+
+.bequote{/*引用*/
+  color:rgb(120, 153, 34);
+  font-size: 30rpx;
+  /*float: left;*/
+  margin-top: 1px;
+}
+.be_br{
+  display: flex;
+  float: none;
+  width: 100%; 
+}
+.input_cs{
+  border: 1px solid #FF8000;
+}
+.loading_gif{
+  height: 100px;
+  width: 100px;
+}
